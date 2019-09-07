@@ -1,0 +1,60 @@
+{
+  "name": "mongodb-utils",
+  "description": "Helper functions to dump or restore MongoDB collections",
+  "version": "0.0.0",
+  "author": "Andrei Popa @nzpopa",
+  "bin": {
+    "mongodb-utils": "./bin/run"
+  },
+  "bugs": "https://github.com/nzpopa/mongodb-utils/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.19",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.1",
+    "json2csv": "^4.5.2",
+    "knox": "^0.9.2"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "globby": "^10.0.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/nzpopa/mongodb-utils",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "mongodb-utils",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "nzpopa/mongodb-utils",
+  "config": {
+    "mongo_host": "127.0.0.1",
+    "mongo_port": "27017",
+    "mongo_db": "local",
+    "mongo_collection": "startup_log",
+    "mongo_query": "'{\"boss\": {\"$eq\": true}}"
+  },
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint .",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
