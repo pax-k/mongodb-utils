@@ -1,7 +1,7 @@
 {
   "name": "@jsfriends/mongodb-utils",
   "description": "Dumps and restores MongoDB collections in JSON format. Can upload dump to AWS S3.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Andrei Popa @nzpopa",
   "bin": {
     "mongodb-utils": "./bin/run"

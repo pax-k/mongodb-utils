@@ -19,7 +19,7 @@ $ npm install -g @jsfriends/mongodb-utils
 $ mongodb-utils COMMAND
 running command...
 $ mongodb-utils (-v|--version|version)
-@jsfriends/mongodb-utils/0.1.1 darwin-x64 node-v10.16.1
+@jsfriends/mongodb-utils/0.1.2 darwin-x64 node-v10.16.1
 $ mongodb-utils --help [COMMAND]
 USAGE
   $ mongodb-utils COMMAND
@@ -30,8 +30,8 @@ USAGE
 <!-- commands -->
 * [`mongodb-utils archive [OPTIONS]`](#mongodb-utils-archive-options)
 * [`mongodb-utils help [COMMAND]`](#mongodb-utils-help-command)
-* [`mongodb-utils restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json`](#mongodb-utils-restore---host-localhost---port-27017---db-local---collection-employees---archive-backupsarchivejson)
-* [`mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups`](#mongodb-utils-sendtos3---bucket-test-bukket-ro---credentials-awsjson----file-backupsbackmeupjson---destdir-backups)
+* [`mongodb-utils restore [OPTIONS]`](#mongodb-utils-restore-options)
+* [`mongodb-utils sendToS3 [OPTIONS]`](#mongodb-utils-sendtos3-options)
 
 ## `mongodb-utils archive [OPTIONS]`
 
@@ -58,12 +58,13 @@ OPTIONS
   --username=username                              Mongo user
 
 EXAMPLES
-  archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}
-  archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}' --sendToS3 
-  --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups
+  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": 
+  true}}
+  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": 
+  true}}' --sendToS3 --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups
 ```
 
-_See code: [src/commands/archive.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/archive.js)_
+_See code: [src/commands/archive.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.2/src/commands/archive.js)_
 
 ## `mongodb-utils help [COMMAND]`
 
@@ -82,16 +83,16 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
 
-## `mongodb-utils restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json`
+## `mongodb-utils restore [OPTIONS]`
 
 Restores the specified MongoDB archive
 
 ```
 USAGE
-  $ mongodb-utils restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json
+  $ mongodb-utils restore [OPTIONS]
 
 OPTIONS
-  --archive=archive                                Archive file to restore
+  --archive=archive                                (required) Archive file to restore
   --authenticationDatabase=authenticationDatabase  Authentication database where the specified username exists
   --collection=collection                          (required) Mongo collection name
   --db=db                                          (required) Mongo database name
@@ -100,25 +101,30 @@ OPTIONS
   --port=port                                      (required) Mongo port
   --ssl                                            Use SSL for Mongo connection
   --username=username                              Mongo user
+
+EXAMPLE
+  mongodb-utils restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json
 ```
 
-_See code: [src/commands/restore.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/restore.js)_
+_See code: [src/commands/restore.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.2/src/commands/restore.js)_
 
-## `mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups`
+## `mongodb-utils sendToS3 [OPTIONS]`
 
 Uploads the specified file to S3
 
 ```
 USAGE
-  $ mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir 
-  backups
+  $ mongodb-utils sendToS3 [OPTIONS]
 
 OPTIONS
   --bucket=bucket            (required) AWS S3 Bucket
   --credentials=credentials  (required) Path to AWS Credentials in JSON form
   --destDir=destDir          [default: /] Destination dir in S3 Bucket
   --file=file                (required) File to upload in S3 Bucket
+
+EXAMPLE
+  mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups
 ```
 
-_See code: [src/commands/sendToS3.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/sendToS3.js)_
+_See code: [src/commands/sendToS3.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.2/src/commands/sendToS3.js)_
 <!-- commandsstop -->
