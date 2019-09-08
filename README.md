@@ -15,11 +15,11 @@ Helper functions to dump or restore MongoDB collections
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g mongodb-utils
+$ npm install -g @jsfriends/mongodb-utils
 $ mongodb-utils COMMAND
 running command...
 $ mongodb-utils (-v|--version|version)
-mongodb-utils/0.1.0 darwin-x64 node-v10.16.1
+@jsfriends/mongodb-utils/0.1.1 darwin-x64 node-v10.16.1
 $ mongodb-utils --help [COMMAND]
 USAGE
   $ mongodb-utils COMMAND
@@ -63,7 +63,7 @@ EXAMPLES
   --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups
 ```
 
-_See code: [src/commands/archive.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.0/src/commands/archive.js)_
+_See code: [src/commands/archive.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/archive.js)_
 
 ## `mongodb-utils help [COMMAND]`
 
@@ -102,7 +102,7 @@ OPTIONS
   --username=username                              Mongo user
 ```
 
-_See code: [src/commands/restore.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.0/src/commands/restore.js)_
+_See code: [src/commands/restore.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/restore.js)_
 
 ## `mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups`
 
@@ -120,5 +120,5 @@ OPTIONS
   --file=file                (required) File to upload in S3 Bucket
 ```
 
-_See code: [src/commands/sendToS3.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.0/src/commands/sendToS3.js)_
+_See code: [src/commands/sendToS3.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.1/src/commands/sendToS3.js)_
 <!-- commandsstop -->
