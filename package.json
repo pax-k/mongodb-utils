@@ -1,6 +1,6 @@
 {
   "name": "mongodb-utils",
-  "description": "Helper functions to dump or restore MongoDB collections",
+  "description": "Dumps and restores MongoDB collections. Can upload dump to AWS S3.",
   "version": "0.0.0",
   "author": "Andrei Popa @nzpopa",
   "bin": {
