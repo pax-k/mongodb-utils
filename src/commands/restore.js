@@ -61,7 +61,8 @@ class RestoreCommand extends Command {
 }
 
 RestoreCommand.description = 'Restores the specified MongoDB archive'
-RestoreCommand.usage = `restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json`;
+RestoreCommand.usage = `restore [OPTIONS]`;
+RestoreCommand.examples = [`mongodb-utils restore --host localhost --port 27017 --db local --collection employees --archive backups/archive.json`];
 
 RestoreCommand.flags = {
   host: flags.string({
@@ -102,7 +103,7 @@ RestoreCommand.flags = {
   }),
   archive: flags.string({
     description: 'Archive file to restore',
-    required: false,
+    required: true,
   })
 }
 

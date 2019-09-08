@@ -14,7 +14,8 @@ class SendToS3Command extends Command {
 }
 
 SendToS3Command.description = 'Uploads the specified file to S3'
-SendToS3Command.usage = 'sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups'
+SendToS3Command.usage = 'sendToS3 [OPTIONS]'
+SendToS3Command.examples = ['mongodb-utils sendToS3 --bucket test-bukket-ro --credentials aws.json  --file backups/backmeup.json --destDir backups'];
 
 SendToS3Command.flags = {
   credentials: flags.string({

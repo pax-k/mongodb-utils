@@ -92,8 +92,8 @@ class ArchiveCommand extends Command {
 ArchiveCommand.description = 'Dumps the specified MongoDB collection'
 ArchiveCommand.usage = `archive [OPTIONS]`;
 ArchiveCommand.examples = [
-  `archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}`,
-  `archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}' --sendToS3 --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups`
+  `mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}`,
+  `mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}' --sendToS3 --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups`
 ]
 
 ArchiveCommand.flags = {
