@@ -1,7 +1,6 @@
-mongodb-utils
-=============
+# mongodb-utils
 
-Helper functions to dump or restore MongoDB collections
+Dumps and restores MongoDB collections in JSON format. Can upload dump to AWS S3.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/mongodb-utils.svg)](https://npmjs.org/package/mongodb-utils)
@@ -9,11 +8,15 @@ Helper functions to dump or restore MongoDB collections
 [![License](https://img.shields.io/npm/l/mongodb-utils.svg)](https://github.com/nzpopa/mongodb-utils/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
+
+- [Usage](#usage)
+- [Commands](#commands)
+  <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @jsfriends/mongodb-utils
 $ mongodb-utils COMMAND
@@ -25,13 +28,17 @@ USAGE
   $ mongodb-utils COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`mongodb-utils archive [OPTIONS]`](#mongodb-utils-archive-options)
-* [`mongodb-utils help [COMMAND]`](#mongodb-utils-help-command)
-* [`mongodb-utils restore [OPTIONS]`](#mongodb-utils-restore-options)
-* [`mongodb-utils sendToS3 [OPTIONS]`](#mongodb-utils-sendtos3-options)
+
+- [`mongodb-utils archive [OPTIONS]`](#mongodb-utils-archive-options)
+- [`mongodb-utils help [COMMAND]`](#mongodb-utils-help-command)
+- [`mongodb-utils restore [OPTIONS]`](#mongodb-utils-restore-options)
+- [`mongodb-utils sendToS3 [OPTIONS]`](#mongodb-utils-sendtos3-options)
 
 ## `mongodb-utils archive [OPTIONS]`
 
@@ -58,9 +65,9 @@ OPTIONS
   --username=username                              Mongo user
 
 EXAMPLES
-  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": 
+  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq":
   true}}
-  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": 
+  mongodb-utils archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq":
   true}}' --sendToS3 --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups
 ```
 
@@ -127,4 +134,5 @@ EXAMPLE
 ```
 
 _See code: [src/commands/sendToS3.js](https://github.com/nzpopa/mongodb-utils/blob/v0.1.2/src/commands/sendToS3.js)_
+
 <!-- commandsstop -->
