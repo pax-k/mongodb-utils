@@ -1,7 +1,7 @@
 {
   "name": "mongodb-utils",
   "description": "Dumps and restores MongoDB collections. Can upload dump to AWS S3.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Andrei Popa @nzpopa",
   "bin": {
     "mongodb-utils": "./bin/run"
