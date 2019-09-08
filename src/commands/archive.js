@@ -1,7 +1,6 @@
 const {Command, flags} = require('@oclif/command');
 const spawn = require('child_process').spawn;
-const cli = require('cli-ux');
-
+const uploadToS3 = require('../shared/uploadToS3');
 
 class ArchiveCommand extends Command {
   generateArchiveName(dbName, colName = '_') {
@@ -28,7 +27,7 @@ class ArchiveCommand extends Command {
       '--db', flags.db,
       '--collection', flags.collection,
       '--out', filePath,
-      '--jsonArray', '--quiet',
+      '--jsonArray'
     ];
     if (flags.username) {
       mongoOptions.push(
@@ -43,7 +42,7 @@ class ArchiveCommand extends Command {
     if (flags.query) {
       mongoOptions.push('--query', flags.query)
     }
-    this.log('Starting mongoexport of ' + flags.db + '/' + flags.collection);
+    this.log('Starting mongoexport of ' + flags.db + '.' + flags.collection);
     const mongodump = spawn('mongoexport', mongoOptions);
 
     return new Promise((resolve, reject) => {
@@ -72,20 +71,30 @@ class ArchiveCommand extends Command {
   }
 
   async run() {
-    cli.ux.action.start('Backing up', {stdout: true});
     let res;
     try {
-      res = await this.dumpCollection();
-      this.log(res);
+      const {flags} = this.parse(ArchiveCommand);
+      const dumpFile = await this.dumpCollection();
+      if (flags.sendToS3) {
+        flags.file = dumpFile;
+        flags.destDir = flags.s3DestDir;
+        flags.credentials = flags.awsCreds;
+        const s3File = await uploadToS3(flags);
+        this.log('S3 file: ', s3File);
+      }
+      this.log('Backup file: ', dumpFile);
     } catch (e) {
       this.error(e);
     }
-    cli.ux.action.stop();
   }
 }
 
 ArchiveCommand.description = 'Dumps the specified MongoDB collection'
-ArchiveCommand.usage = `archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}'`;
+ArchiveCommand.usage = `archive [OPTIONS]`;
+ArchiveCommand.examples = [
+  `archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}`,
+  `archive --host 127.0.0.1 --port 27017 --db local --collection startup_log --query '{"boss": {"$eq": true}}' --sendToS3 --awsCreds aws.json --bucket test-bukket-ro --s3DestDir backups`
+]
 
 ArchiveCommand.flags = {
   host: flags.string({
@@ -131,8 +140,26 @@ ArchiveCommand.flags = {
   dumpOutputDir: flags.string({
     description: 'Directory where to store the dump',
     required: false,
-    defaults: 'backups/'
-  })
+    default: 'backups/'
+  }),
+  sendToS3: flags.boolean({
+    description: '',
+    required: false,
+    dependsOn: ['awsCreds', 'bucket']
+  }),
+  awsCreds: flags.string({
+    description: 'Path to AWS Credentials in JSON form',
+    required: false,
+  }),
+  bucket: flags.string({
+    description: 'AWS S3 Bucket',
+    required: false,
+  }),
+  s3DestDir: flags.string({
+    description: 'Destination dir in S3 Bucket',
+    required: false,
+    default: '/'
+  }),
 }
 
 module.exports = ArchiveCommand

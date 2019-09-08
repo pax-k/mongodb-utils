@@ -1,7 +1,5 @@
 const {Command, flags} = require('@oclif/command');
 const spawn = require('child_process').spawn;
-const cli = require('cli-ux');
-
 class RestoreCommand extends Command {
   async restoreCollection() {
     const {flags} = this.parse(RestoreCommand);
@@ -52,7 +50,6 @@ class RestoreCommand extends Command {
   }
 
   async run() {
-    cli.ux.action.start('Restoring...', {stdout: true});
     let res;
     try {
       res = await this.restoreCollection();
@@ -60,7 +57,6 @@ class RestoreCommand extends Command {
     } catch (e) {
       this.error(e);
     }
-    cli.ux.action.stop();
   }
 }
 
